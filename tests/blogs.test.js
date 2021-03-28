@@ -1,18 +1,18 @@
-const Page = require('./helpers/page');
+const Page = require("./helpers/page");
 let page;
 
 beforeEach(async () => {
   page = await Page.build();
-  await page.goto('localhost:3000');
+  await page.goto("http://localhost:3000");
 });
 
 afterEach(async () => {
   await page.close();
 });
 
-describe('Blogs', () => {
-  test('Blogs ', async () => {
-    const headerText = await page.getElementText('a.brand-logo');
-    expect(headerText).toEqual('Blogster');
+describe("Blogs", () => {
+  test("Blogs ", async () => {
+    const headerText = await page.getElementText("a.brand-logo");
+    expect(headerText).toEqual("Blogster");
   });
 });
