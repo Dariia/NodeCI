@@ -5,8 +5,10 @@ import BlogForm from './BlogForm';
 import BlogFormReview from './BlogFormReview';
 
 class BlogNew extends Component {
-  state = { showFormReview: false };
-
+  constructor() {
+    super();
+    this.state = { showFormReview: false };
+  }
   renderContent() {
     if (this.state.showFormReview) {
       return (
@@ -17,21 +19,15 @@ class BlogNew extends Component {
     }
 
     return (
-      <BlogForm
-        onBlogSubmit={() => this.setState({ showFormReview: true })}
-      />
+      <BlogForm onBlogSubmit={() => this.setState({ showFormReview: true })} />
     );
   }
 
   render() {
-    return (
-      <div>
-        {this.renderContent()}
-      </div>
-    );
+    return <div>{this.renderContent()}</div>;
   }
 }
 
 export default reduxForm({
-  form: 'blogForm'
+  form: 'blogForm',
 })(BlogNew);

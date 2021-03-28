@@ -17,4 +17,5 @@ install:
 script:
   - nophup npm run start &
   - sleep 3
+  - npm run lint
   - npm run test
