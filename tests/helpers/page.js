@@ -1,12 +1,12 @@
-const puppeteer = require("puppeteer");
-const sessionFactory = require("../factory/sessionFactory");
-const userFactory = require("../factory/userFactory");
+const puppeteer = require('puppeteer');
+const sessionFactory = require('../factory/sessionFactory');
+const userFactory = require('../factory/userFactory');
 
 class Page {
   static async build() {
     const browser = await puppeteer.launch({
       headless: true,
-      args: ["--no-sandbox"],
+      args: ['--no-sandbox'],
     });
     const originalPage = await browser.newPage();
     const customPage = new Page(originalPage);
@@ -24,10 +24,10 @@ class Page {
     const user = await userFactory();
     const { session, sig } = sessionFactory(user);
 
-    await this.page.setCookie({ name: "session", value: session });
-    await this.page.setCookie({ name: "session.sig", value: sig });
+    await this.page.setCookie({ name: 'session', value: session });
+    await this.page.setCookie({ name: 'session.sig', value: sig });
     await this.page.reload({
-      waitUntil: ["networkidle0", "domcontentloaded"],
+      waitUntil: ['networkidle0', 'domcontentloaded'],
     });
   }
 
@@ -39,10 +39,10 @@ class Page {
     return this.page.evaluate(
       (_url) =>
         fetch(_url, {
-          method: "GET",
-          credentials: "same-origin",
+          method: 'GET',
+          credentials: 'same-origin',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         }).then((res) => res.json()),
       url
@@ -53,10 +53,10 @@ class Page {
     return this.page.evaluate(
       (_url, _data) =>
         fetch(_url, {
-          method: "POST",
-          credentials: "same-origin",
+          method: 'POST',
+          credentials: 'same-origin',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(_data),
         }).then((res) => res.json()),
